@@ -28,7 +28,7 @@ wis2-gb is a Reference Implementation of a WIS2 Global Broker.
 - [virtualenv](https://virtualenv.pypa.io)
 
 ### Dependencies
-Dependencies are listed in [requirements.txt](requirements.txt). Dependencies
+Dependencies are listed in [REQUIREMENTS.md](REQUIREMENTS.md). Dependencies
 are automatically installed during pywis-pubsub installation.
 
 ### Installing wis2-gb
