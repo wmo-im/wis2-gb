@@ -2,7 +2,7 @@
 
 ## Docker
 
-'''
+```
 # Uninstall all conflicting packages
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 
@@ -21,7 +21,7 @@ sudo apt-get update
 
 # Install Docker and Docker Compose module
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-'''
+```
 
 ## Docker Images
 
