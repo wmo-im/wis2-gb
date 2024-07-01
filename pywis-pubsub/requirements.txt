@@ -1,0 +1,9 @@
+boto3
+click
+jsonschema
+paho-mqtt<2
+pyyaml
+requests
+shapely<2
+urllib3<2
+redis[hiredis]

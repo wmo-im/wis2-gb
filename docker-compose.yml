@@ -1,0 +1,182 @@
+services:
+
+  redis-node-0:
+    container_name: redis-node-0
+    image: docker.io/bitnami/redis-cluster:7.2
+    volumes:
+      - ${WIS2_GB_HOST_DATADIR}/redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-0:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+
+  redis-node-1:
+    container_name: redis-node-1
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ${WIS2_GB_HOST_DATADIR}/redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-1:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+
+  redis-node-2:
+    container_name: redis-node-2
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ${WIS2_GB_HOST_DATADIR}/redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-2:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+
+  redis-node-3:
+    container_name: redis-node-3
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ${WIS2_GB_HOST_DATADIR}/redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-3:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+
+  redis-node-4:
+    container_name: redis-node-4
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ${WIS2_GB_HOST_DATADIR}/redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-4:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+
+  redis-node-5:
+    container_name: redis-node-5
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ${WIS2_GB_HOST_DATADIR}/redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-5:/bitnami/redis/data
+    depends_on:
+      - redis-node-0
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+      - redis-node-4
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_CLUSTER_REPLICAS=1
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+      - REDIS_CLUSTER_CREATOR=yes
+
+  metrics-collector:
+    container_name: metrics-collector
+    restart: always
+    build:
+      context: ./metrics-collector/
+    env_file:
+      - wis2-gb.env
+    ports:
+      - 8999:8006
+    depends_on:
+      redis-node-5:
+        condition: service_started
+
+  global-broker:
+    container_name: global-broker
+    build:
+      context: ./wis2-broker
+    env_file:
+      - wis2-gb.env
+    ports:
+        - 1883:1883
+        - 8883:8883
+    depends_on:
+      redis-node-5:
+        condition: service_started
+
+  fr-meteo-france-global-broker:
+    container_name: fr-meteo-france-global-broker
+    build:
+      context: ./pywis-pubsub
+    image: wis2-relay
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@globalbroker.meteo.fr:8883
+      - SUB_TOPICS=origin/a/wis2/#
+      - SUB_CENTRE_ID=fr-meteo-france-global-broker
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  br-inmet-global-broker:
+    container_name: br-inmet-global-broker
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@globalbroker.inmet.gov.br:8883
+      - SUB_TOPICS=origin/a/wis2/#
+      - SUB_CENTRE_ID=br-inmet-global-broker
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  de-dwd-global-cache:
+    container_name: de-dwd-global-cache
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
+      - SUB_TOPICS=cache/a/wis2/#
+      - SUB_CENTRE_ID=de-dwd-global-cache
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  us-noaa-synoptic-global-cache:
+    container_name: us-noaa-synoptic-global-cache
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://wis2:synoptic_global_cache_mvp_2023@cache.wis2.synopticdata.com:8883
+      - SUB_TOPICS=cache/a/wis2/#
+      - SUB_CENTRE_ID=us-noaa-synoptic-global-cache
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    depends_on:
+      global-broker:
+        condition: service_started
+
+volumes:
+  redis-cluster_data-0:
+    driver: local
+  redis-cluster_data-1:
+    driver: local
+  redis-cluster_data-2:
+    driver: local
+  redis-cluster_data-3:
+    driver: local
+  redis-cluster_data-4:
+    driver: local
+  redis-cluster_data-5:
+    driver: local
+
