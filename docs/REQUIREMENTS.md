@@ -25,12 +25,12 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 ## Docker Images
 
-['Python 3 Alpine'](https://hub.docker.com/_/python)
-['Eclipse Mosquitto'](https://hub.docker.com/_/eclipse-mosquitto)
-['Redis'](https://hub.docker.com/_/redis)
-['Grafana'](https://hub.docker.com/r/grafana/grafana)
-['Grafana Loki'](https://hub.docker.com/r/grafana/loki)
-['Prometheus'](https://hub.docker.com/r/bitnami/prometheus)
+- ['Python 3 Alpine'](https://hub.docker.com/_/python)
+- ['Eclipse Mosquitto'](https://hub.docker.com/_/eclipse-mosquitto)
+- ['Redis'](https://hub.docker.com/_/redis)
+- ['Grafana'](https://hub.docker.com/r/grafana/grafana)
+- ['Grafana Loki'](https://hub.docker.com/r/grafana/loki)
+- ['Prometheus'](https://hub.docker.com/r/bitnami/prometheus)
 
 ## WMO-IM Repositories
 
