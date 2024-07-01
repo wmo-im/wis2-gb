@@ -49,11 +49,12 @@ pip3 install .
 
 The Docker setup uses Docker and Docker Compose to manage the following services:
 
-- **wis2-broker**: MQTT broker
-- **pywis-pubsub**: MQTT subscription relay.  Subscribes to WIS2 participants, performs message verification and de-duplication and then publishes the message to the Global Broker.
+- **global-broker**: [`Eclipse Misquitto`](https://mosquitto.org/) MQTT broker
+- **pywis-pubsub**: [`Pywis PubSub`](https://github.com/wmo-im/pywis-pubsub) MQTT subscription relay.  Based on Pywis PubSub, multiple containers each subscribes to WIS2 participants, performs message verification and de-duplication and then publishes the message to the Global Broker.
 - **grafana**: [`Grafana`](https://grafana.com/grafana/dashboards/) provides administrator dashboards, log monitoring and browsing prometheus metrics.
 - **loki**: [`Grafana Loki`](https://grafana.com/docs/loki/latest/) provides administrator dashboards, log monitoring and browsing prometheus metrics.
 - **prometheus**:[`Prometheus`](https://prometheus.io/) provides time-series metrics collections
+- **metrics-collector**: Subscribes to message telemetry, complies metrics from Prometheus and exposes HTTP metric status endpoint.
 
 See [`wis2-gb.env`](wis2-gb.env) for default environment variable settings.
 
