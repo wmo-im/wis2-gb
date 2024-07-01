@@ -36,12 +36,12 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 ## Python Packages
 
-boto3
-click
-jsonschema
-paho-mqtt<2
-pyyaml
-requests
-shapely<2
-urllib3<2
-redis[hiredis]
+- boto3
+- click
+- jsonschema
+- paho-mqtt<2
+- pyyaml
+- requests
+- shapely<2
+- urllib3<2
+- redis[hiredis]
