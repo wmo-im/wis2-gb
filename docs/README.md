@@ -4,7 +4,7 @@
 
 wis2-gb is a Reference Implementation of a WIS2 Global Broker.
 
-<a href="docs/GlobalBroker_C4.png"><img alt="WIS2 Global Broker C4 diagram" src="docs/GlobalBroker_C4.png" width="800"/></a>
+<a href="docs/GlobalBroker_C4.png"><img alt="WIS2 Global Broker C4 diagram" src="GlobalBroker_C4.png" width="800"/></a>
 
 ## Workflow
 
