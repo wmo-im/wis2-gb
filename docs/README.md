@@ -17,6 +17,7 @@ wis2-gb is a Reference Implementation of a WIS2 Global Broker.
   - `origin/a/wis2/{centre_id}/#`
 - on all notifications:
   - verfies message is WIS2 compliant
+  - verifies the message topic is WIS2 compliant
   - ensures the message is unique, not previously recieved from any other subscription
   - publishes the message to the Global Broker
   - performs metric accounting
@@ -24,8 +25,7 @@ wis2-gb is a Reference Implementation of a WIS2 Global Broker.
 ## Installation
 
 ### Requirements
-- Python 3
-- [virtualenv](https://virtualenv.pypa.io)
+- Docker Compose
 
 ### Dependencies
 Dependencies are listed in [REQUIREMENTS.md](REQUIREMENTS.md). Dependencies
@@ -34,15 +34,14 @@ are automatically installed during pywis-pubsub installation.
 ### Installing wis2-gb
 
 ```bash
-# setup virtualenv
-python3 -m venv --system-site-packages wis2-gb
-cd wis2-gb
-source bin/activate
-
 # clone codebase and install
 git clone https://github.com/wmo-im/wis2-gb.git
 cd wis2-gb
-pip3 install .
+
+# configure broker profile
+./setup-links.sh brief
+make build
+make up
 ```
 
 ### Docker
@@ -50,7 +49,8 @@ pip3 install .
 The Docker setup uses Docker and Docker Compose to manage the following services:
 
 - **wis2-broker**: MQTT broker
-- **pywis-pubsub**: MQTT subscription relay.  Subscribes to WIS2 participants, performs message verification and de-duplication and then publishes the message to the Global Broker.
+- **wis2-relay**: MQTT subscription relay.  Subscribes to WIS2 participants, performs message verification and de-duplication and then publishes the message to the Global Broker.
+- **redis**: ['Redis Cache](https://redis.io/docs/latest/get-started/) provides hasing cache for de-duplication using Wis2 Notificaion Message UUID.
 - **grafana**: [`Grafana`](https://grafana.com/grafana/dashboards/) provides administrator dashboards, log monitoring and browsing prometheus metrics.
 - **loki**: [`Grafana Loki`](https://grafana.com/docs/loki/latest/) provides administrator dashboards, log monitoring and browsing prometheus metrics.
 - **prometheus**:[`Prometheus`](https://prometheus.io/) provides time-series metrics collections
