@@ -1,5 +1,4 @@
 services:
-
   loki:
     image: grafana/loki:2.4.1
     container_name: loki
@@ -192,13 +191,6 @@ services:
     restart: always
     build:
       context: ./metrics-collector/
-    env_file:
-      - wis2-gb.env
-    ports:
-      - 8999:8006
-    depends_on:
-      redis-node-5:
-        condition: service_started
     logging:
       driver: loki
       options:
@@ -206,6 +198,13 @@ services:
         mode: non-blocking
         max-buffer-size: 4m
         loki-retries: "3"
+    env_file:
+      - wis2-gb.env
+    ports:
+      - 8999:8006
+    depends_on:
+      global-broker:
+        condition: service_started
 
   global-broker:
     container_name: global-broker
@@ -227,88 +226,20 @@ services:
         max-buffer-size: 4m
         loki-retries: "3"
 
-  fr-meteo-france-global-broker:
-    container_name: fr-meteo-france-global-broker
+  io-wis2dev-11-test:
+    container_name: io-wis2dev-11-test
     build:
-      context: ./wis2-relay
-    image: wis2-relay
+      context: ./wis2-relay/
+    image: wis2-relay:latest
     restart: always
     env_file:
       - wis2-gb.env
     environment:
-      - SUB_BROKER_URL=mqtts://everyone:everyone@globalbroker.meteo.fr:8883
+      - SUB_BROKER_URL=mqtt://everyone:everyone@test-node-1.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/#
-      - SUB_CENTRE_ID=fr-meteo-france-global-broker
-      - WIS2_GB_BACKEND_URL=redis-node-0
-    depends_on:
-      global-broker:
-        condition: service_started
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
-        mode: non-blocking
-        max-buffer-size: 4m
-        loki-retries: "3"
-
-  br-inmet-global-broker:
-    container_name: br-inmet-global-broker
-    image: wis2-relay:latest
-    restart: always
-    env_file:
-      - wis2-gb.env
-    environment:
-      - SUB_BROKER_URL=mqtts://everyone:everyone@globalbroker.inmet.gov.br:8883
-      - SUB_TOPICS=origin/a/wis2/#
-      - SUB_CENTRE_ID=br-inmet-global-broker
-      - WIS2_GB_BACKEND_URL=redis-node-1
-    depends_on:
-      global-broker:
-        condition: service_started
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
-        mode: non-blocking
-        max-buffer-size: 4m
-        loki-retries: "3"
-
-  de-dwd-global-cache:
-    container_name: de-dwd-global-cache
-    image: wis2-relay:latest
-    restart: always
-    env_file:
-      - wis2-gb.env
-    environment:
-      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
-      - SUB_TOPICS=cache/a/wis2/#
-      - SUB_CENTRE_ID=de-dwd-global-cache
-      - WIS2_GB_BACKEND_URL=redis-node-2
-    depends_on:
-      global-broker:
-        condition: service_started
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
-        mode: non-blocking
-        max-buffer-size: 4m
-        loki-retries: "3"
-
-  us-noaa-synoptic-global-cache:
-    container_name: us-noaa-synoptic-global-cache
-    image: wis2-relay:latest
-    restart: always
-    env_file:
-      - wis2-gb.env
-    environment:
-      - SUB_BROKER_URL=mqtts://wis2:synoptic_global_cache_mvp_2023@cache.wis2.synopticdata.com:8883
-      - SUB_TOPICS=cache/a/wis2/#
-      - SUB_CENTRE_ID=us-noaa-synoptic-global-cache
+      - WIS2_GB_LOGGING_LOGLEVEL=INFO
+      - SUB_CENTRE_ID=io-wis2dev-11-test
       - WIS2_GB_BACKEND_URL=redis-node-3
-    depends_on:
-      global-broker:
-        condition: service_started
     logging:
       driver: loki
       options:
@@ -316,6 +247,9 @@ services:
         mode: non-blocking
         max-buffer-size: 4m
         loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
 
 volumes:
   redis-cluster_data-0:
@@ -334,4 +268,3 @@ volumes:
     driver: local
   prometheus-data:
     driver: local
-

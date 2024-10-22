@@ -1,0 +1,199 @@
+services:
+  io-wis2dev-12-test:
+    container_name: io-wis2dev-12-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-2.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-12-test/#
+      - SUB_CENTRE_ID=io-wis2dev-12-test
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  io-wis2dev-13-test:
+    container_name: io-wis2dev-13-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-3.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-13-test/#
+      - SUB_CENTRE_ID=io-wis2dev-13-test
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  io-wis2dev-14-test:
+    container_name: io-wis2dev-14-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-4.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-14-test/#
+      - SUB_CENTRE_ID=io-wis2dev-14-test
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  io-wis2dev-15-test:
+    container_name: io-wis2dev-15-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-5.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-15-test/#
+      - SUB_CENTRE_ID=io-wis2dev-15-test
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  io-wis2dev-16-test:
+    container_name: io-wis2dev-16-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-6.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-16-test/#
+      - SUB_CENTRE_ID=io-wis2dev-16-test
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  io-wis2dev-17-test:
+    container_name: io-wis2dev-17-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-7.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-17-test/#
+      - SUB_CENTRE_ID=io-wis2dev-17-test
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  io-wis2dev-18-test:
+    container_name: io-wis2dev-18-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-8.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-18-test/#
+      - SUB_CENTRE_ID=io-wis2dev-18-test
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  io-wis2dev-19-test:
+    container_name: io-wis2dev-19-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-9.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-19-test/#
+      - SUB_CENTRE_ID=io-wis2dev-19-test
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  io-wis2dev-20-test:
+    container_name: io-wis2dev-20-test
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-10.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/io-wis2dev-20-test/#
+      - SUB_CENTRE_ID=io-wis2dev-20-test
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+

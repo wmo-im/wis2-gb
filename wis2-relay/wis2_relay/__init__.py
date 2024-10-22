@@ -17,38 +17,25 @@
 # specific language governing permissions and limitations
 # under the License.
 #
-###############################################################################
+#30a31,32
+##############################################################################
 
-DOCKER_COMPOSE_ARGS=--project-name wis2-gb --file docker-compose.yml --file docker-compose.override.yml
+__version__ = '0.9.dev0'
 
-build:
-	docker-compose $(DOCKER_COMPOSE_ARGS) build
+import click
 
-up:
-	docker-compose $(DOCKER_COMPOSE_ARGS) up --detach
+from wis2_relay.schema import schema
+from wis2_relay.relay import relay
+from wis2_relay.topic import topic
 
-down:
-	docker-compose $(DOCKER_COMPOSE_ARGS) down
 
-start:
-	docker-compose $(DOCKER_COMPOSE_ARGS) start
+@click.group()
+@click.version_option(version=__version__)
+def cli():
+    """WIS2 Global Broker Publish/Subscribe container"""
 
-stop:
-	docker-compose $(DOCKER_COMPOSE_ARGS) stop
+    pass
 
-restart: down up
-
-force-build:
-	docker-compose $(DOCKER_COMPOSE_ARGS) build --no-cache
-
-logs:
-	docker-compose $(DOCKER_COMPOSE_ARGS) logs --follow
-
-clean:
-	docker system prune -f
-	docker volume prune -f
-
-rm:
-	docker volume rm $(shell docker volume ls --filter name=wis2-gb -q)
-
-.PHONY: build up down start stop restart force-build logs rm clean
+cli.add_command(schema)
+cli.add_command(topic)
+cli.add_command(relay)

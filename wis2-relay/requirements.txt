@@ -1,0 +1,7 @@
+click
+jsonschema[format]
+paho-mqtt
+pyyaml
+requests
+shapely
+redis[hiredis]

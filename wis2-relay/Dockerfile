@@ -19,36 +19,16 @@
 #
 ###############################################################################
 
-DOCKER_COMPOSE_ARGS=--project-name wis2-gb --file docker-compose.yml --file docker-compose.override.yml
+FROM python:3.10
 
-build:
-	docker-compose $(DOCKER_COMPOSE_ARGS) build
+COPY . /app/
 
-up:
-	docker-compose $(DOCKER_COMPOSE_ARGS) up --detach
+WORKDIR /app
 
-down:
-	docker-compose $(DOCKER_COMPOSE_ARGS) down
+RUN python3 setup.py install
 
-start:
-	docker-compose $(DOCKER_COMPOSE_ARGS) start
+RUN wis2-relay schema sync
+RUN wis2-relay topic sync
 
-stop:
-	docker-compose $(DOCKER_COMPOSE_ARGS) stop
-
-restart: down up
-
-force-build:
-	docker-compose $(DOCKER_COMPOSE_ARGS) build --no-cache
-
-logs:
-	docker-compose $(DOCKER_COMPOSE_ARGS) logs --follow
-
-clean:
-	docker system prune -f
-	docker volume prune -f
-
-rm:
-	docker volume rm $(shell docker volume ls --filter name=wis2-gb -q)
-
-.PHONY: build up down start stop restart force-build logs rm clean
+CMD wis2-relay relay --config /app/local.yml --verbosity $WIS2_GB_LOGGING_LOGLEVEL
+#CMD /usr/bin/sleep 3600

@@ -24,7 +24,7 @@ FROM python:3-alpine
 COPY ./metrics_collector.py /app/metrics_collector.py
 COPY ./requirements.txt /app/requirements.txt
 COPY ./gb.csv /app/gb.csv
-RUN  pip3 install paho-mqtt==1.6.1
+RUN  pip3 install paho-mqtt
 RUN  pip3 install prometheus-client
 RUN  pip3 install requests
 

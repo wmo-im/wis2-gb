@@ -19,36 +19,32 @@
 #
 ###############################################################################
 
-DOCKER_COMPOSE_ARGS=--project-name wis2-gb --file docker-compose.yml --file docker-compose.override.yml
+import logging
+import sys
 
-build:
-	docker-compose $(DOCKER_COMPOSE_ARGS) build
+import click
 
-up:
-	docker-compose $(DOCKER_COMPOSE_ARGS) up --detach
+OPTION_CONFIG = click.option(
+    '--config', '-c',
+    type=click.File('rb', encoding='utf-8'),
+    help='Name of configuration file')
 
-down:
-	docker-compose $(DOCKER_COMPOSE_ARGS) down
 
-start:
-	docker-compose $(DOCKER_COMPOSE_ARGS) start
+def OPTION_VERBOSITY(f):
+    logging_options = ['ERROR', 'WARNING', 'INFO', 'DEBUG']
 
-stop:
-	docker-compose $(DOCKER_COMPOSE_ARGS) stop
+    def callback(ctx, param, value):
+        if value is not None:
+            logging.basicConfig(stream=sys.stdout,
+                                level=getattr(logging, value))
+        return True
 
-restart: down up
+    return click.option('--verbosity', '-v',
+                        type=click.Choice(logging_options),
+                        help='Verbosity',
+                        callback=callback)(f)
 
-force-build:
-	docker-compose $(DOCKER_COMPOSE_ARGS) build --no-cache
 
-logs:
-	docker-compose $(DOCKER_COMPOSE_ARGS) logs --follow
-
-clean:
-	docker system prune -f
-	docker volume prune -f
-
-rm:
-	docker volume rm $(shell docker volume ls --filter name=wis2-gb -q)
-
-.PHONY: build up down start stop restart force-build logs rm clean
+def cli_callbacks(f):
+    f = OPTION_VERBOSITY(f)
+    return f

@@ -197,7 +197,7 @@ services:
     ports:
       - 8999:8006
     depends_on:
-      redis-node-5:
+      global-broker:
         condition: service_started
     logging:
       driver: loki
@@ -334,4 +334,3 @@ volumes:
     driver: local
   prometheus-data:
     driver: local
-
