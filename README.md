@@ -24,8 +24,8 @@ wis2-gb is a Reference Implementation of a WIS2 Global Broker.
 ## Installation
 
 ### Requirements
-- [docker]("https://docker.com")
-- [docker-compose]("https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)")
+- [`Docker`](https://docker.com/)
+- [`Docker Compose`](https://github.com/docker/compose/)
 - python 3.10
 - python requests==2.26.0
 - python urllib3==1.26.0
@@ -42,13 +42,17 @@ are automatically installed during pywis-pubsub installation.
 
 # clone codebase
 git clone https://github.com/wmo-im/wis2-gb.git
+
 # install system dependencies
 cd wis2-gb
 ./platform-setup.sh
+
 # select broker profile
 ./setup-links.sh brief
+
 # build global broker containers
 make build
+
 # start global broker containers
 make up
 ```
