@@ -80,6 +80,8 @@ Several setups are pre-configured and implemented with soft links using **setup-
 - **brief**: Small test configuration with global service participants
 - **full**: Full compliment of WIS2 participants
 - **func**: Functional test configuration compatible with [`Wis2-Global-Services-Testing`](https://github.com/wmo-im/wis2-global-services-testing/blob/main/global-services-testing/sections/testing/global-broker.adoc)
+
+
 The [`Makefile`](Makefile) in the root directory provides options to manage the Docker Compose setup.
 
 ```bash
