@@ -1,0 +1,13 @@
+apiVersion: 1
+
+datasources:
+  - name: globalbroker-loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    jsonData:
+      maxLines: 1000
+  - name: globalbroker-prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090

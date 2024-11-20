@@ -1,0 +1,1500 @@
+services:
+
+  ly-lnmc:
+    container_name: ly-lnmc
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@102.221.8.94:1883
+      - SUB_TOPICS=origin/a/wis2/ly-lnmc/#
+      - SUB_CENTRE_ID=ly-lnmc
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  zw-msd:
+    container_name: zw-msd
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@136.156.130.101:1883
+      - SUB_TOPICS=origin/a/wis2/zw-msd/#
+      - SUB_CENTRE_ID=zw-msd
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ag-antiguamet:
+    container_name: ag-antiguamet
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/ag-antiguamet/#
+      - SUB_CENTRE_ID=ag-antiguamet
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  bs-metservice:
+    container_name: bs-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/bs-metservice/#
+      - SUB_CENTRE_ID=bs-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ms-metservice:
+    container_name: ms-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/ms-metservice/#
+      - SUB_CENTRE_ID=ms-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ai-metservice:
+    container_name: ai-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/ai-metservice/#
+      - SUB_CENTRE_ID=ai-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  gy-hydromet:
+    container_name: gy-hydromet
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/gy-hydromet/#
+      - SUB_CENTRE_ID=gy-hydromet
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  jm-msj:
+    container_name: jm-msj
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/jm-msj/#
+      - SUB_CENTRE_ID=jm-msj
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ky-cinws:
+    container_name: ky-cinws
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/ky-cinws/#
+      - SUB_CENTRE_ID=ky-cinws
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  kn-metservice:
+    container_name: kn-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/kn-metservice/#
+      - SUB_CENTRE_ID=kn-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  sx-metservice:
+    container_name: sx-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/sx-metservice/#
+      - SUB_CENTRE_ID=sx-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  vc-metservice:
+    container_name: vc-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/vc-metservice/#
+      - SUB_CENTRE_ID=vc-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  tc-metservice:
+    container_name: tc-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/tc-metservice/#
+      - SUB_CENTRE_ID=tc-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  gd-metservice:
+    container_name: gd-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/gd-metservice/#
+      - SUB_CENTRE_ID=gd-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  lc-metservice:
+    container_name: lc-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/lc-metservice/#
+      - SUB_CENTRE_ID=lc-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  dm-dms:
+    container_name: dm-dms
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
+      - SUB_TOPICS=origin/a/wis2/dm-dms/#
+      - SUB_CENTRE_ID=dm-dms
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  hk-hko:
+    container_name: hk-hko
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@20.239.90.71:1883
+      - SUB_TOPICS=origin/a/wis2/hk-hko/#
+      - SUB_CENTRE_ID=hk-hko
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  bf-anam:
+    container_name: bf-anam
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@212.52.154.134:1883
+      - SUB_TOPICS=origin/a/wis2/bf-anam/#
+      - SUB_CENTRE_ID=bf-anam
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  sz-swazimet:
+    container_name: sz-swazimet
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@3.77.214.70:1883
+      - SUB_TOPICS=origin/a/wis2/sz-swazimet/#
+      - SUB_CENTRE_ID=sz-swazimet
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  eu-eumetnet-femdi:
+    container_name: eu-eumetnet-femdi
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:fanja6-hajxim-kUdxyq@39ed2d447029453c8495acc5d745e701.s1.eu.hivemq.cloud:8883
+      - SUB_TOPICS=origin/a/wis2/eu-eumetnet-femdi/#
+      - SUB_CENTRE_ID=eu-eumetnet-femdi
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  int-eumetsat:
+    container_name: int-eumetsat
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://guest:StandingRoomOnly@64.225.129.189:8883
+      - SUB_TOPICS=origin/a/wis2/int-eumetsat/#
+      - SUB_CENTRE_ID=int-eumetsat
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  dz-meteoalgerie:
+    container_name: dz-meteoalgerie
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@ametwis2box.meteo.dz:1883
+      - SUB_TOPICS=origin/a/wis2/dz-meteoalgerie/#
+      - SUB_CENTRE_ID=dz-meteoalgerie
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  int-ecmwf:
+    container_name: int-ecmwf
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://wis2:Rf65L87534@aux.ecmwf.int:8883
+      - SUB_TOPICS=origin/a/wis2/int-ecmwf/#
+      - SUB_CENTRE_ID=int-ecmwf
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  bb-barbadosmetservices:
+    container_name: bb-barbadosmetservices
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@barbadosweatherdata.org:1883
+      - SUB_TOPICS=origin/a/wis2/bb-barbadosmetservices/#
+      - SUB_CENTRE_ID=bb-barbadosmetservices
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  au-bom:
+    container_name: au-bom
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@broker.wis2.cloud.bom.gov.au:8883
+      - SUB_TOPICS=origin/a/wis2/au-bom/#
+      - SUB_CENTRE_ID=au-bom
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  fr-meteofrance:
+    container_name: fr-meteofrance
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=ws://everyone:everyone@globalbroker.meteo.fr:443/mqtt
+      - SUB_TOPICS=origin/a/wis2/fr-meteofrance/#
+      - SUB_CENTRE_ID=fr-meteofrance
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ca-eccc-msc:
+    container_name: ca-eccc-msc
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@hpfx.collab.science.gc.ca:8883
+      - SUB_TOPICS=origin/a/wis2/ca-eccc-msc/#
+      - SUB_CENTRE_ID=ca-eccc-msc
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  id-bmkg:
+    container_name: id-bmkg
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2node.bmkg.go.id:1883
+      - SUB_TOPICS=origin/a/wis2/id-bmkg/#
+      - SUB_CENTRE_ID=id-bmkg
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  sg-mss:
+    container_name: sg-mss
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@sgp-mss.messaging.solace.cloud:8883
+      - SUB_TOPICS=origin/a/wis2/sg-mss/#
+      - SUB_CENTRE_ID=sg-mss
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  sg-mss-asmc:
+    container_name: sg-mss-asmc
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@sgp-mss.messaging.solace.cloud:8883
+      - SUB_TOPICS=origin/a/wis2/sg-mss-asmc/#
+      - SUB_CENTRE_ID=sg-mss-asmc
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  us-synoptic-uas:
+    container_name: us-synoptic-uas
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://uasdc_read:wmo-uasdc-campaign-2024-2e16f7@uasdc.wmo.synoptic.network:1883
+      - SUB_TOPICS=origin/a/wis2/us-synoptic-uas/#
+      - SUB_CENTRE_ID=us-synoptic-uas
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  uy-inumet:
+    container_name: uy-inumet
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@w2b.inumet.gub.uy:8883
+      - SUB_TOPICS=origin/a/wis2/uy-inumet/#
+      - SUB_CENTRE_ID=uy-inumet
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ar-smn:
+    container_name: ar-smn
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@w2b.smn.gov.ar:1883
+      - SUB_TOPICS=origin/a/wis2/ar-smn/#
+      - SUB_CENTRE_ID=ar-smn
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  cg-met:
+    container_name: cg-met
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis.dirmet.cg:1883
+      - SUB_TOPICS=origin/a/wis2/cg-met/#
+      - SUB_CENTRE_ID=cg-met
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  cu-insmet:
+    container_name: cu-insmet
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis.insmet.cu:1883
+      - SUB_TOPICS=origin/a/wis2/cu-insmet/#
+      - SUB_CENTRE_ID=cu-insmet
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ke-kmd:
+    container_name: ke-kmd
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis.meteo.go.ke:1883
+      - SUB_TOPICS=origin/a/wis2/ke-kmd/#
+      - SUB_CENTRE_ID=ke-kmd
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  it-meteoam:
+    container_name: it-meteoam
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis.meteoam.it:8883
+      - SUB_TOPICS=origin/a/wis2/it-meteoam/#
+      - SUB_CENTRE_ID=it-meteoam
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  tt-trin-met:
+    container_name: tt-trin-met
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis.metoffice.gov.tt:1883
+      - SUB_TOPICS=origin/a/wis2/tt-trin-met/#
+      - SUB_CENTRE_ID=tt-trin-met
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  bz-nms:
+    container_name: bz-nms
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis.nms.gov.bz:1883
+      - SUB_TOPICS=origin/a/wis2/bz-nms/#
+      - SUB_CENTRE_ID=bz-nms
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  za-weathersa:
+    container_name: za-weathersa
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis.weathersa.co.za:1883
+      - SUB_TOPICS=origin/a/wis2/za-weathersa/#
+      - SUB_CENTRE_ID=za-weathersa
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  il-ims:
+    container_name: il-ims
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
+      - SUB_TOPICS=origin/a/wis2/il-ims/#
+      - SUB_CENTRE_ID=il-ims
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  cy-dom:
+    container_name: cy-dom
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
+      - SUB_TOPICS=origin/a/wis2/cy-dom/#
+      - SUB_CENTRE_ID=cy-dom
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  us-cimss:
+    container_name: us-cimss
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
+      - SUB_TOPICS=origin/a/wis2/us-cimss/#
+      - SUB_CENTRE_ID=us-cimss
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  de-dwd:
+    container_name: de-dwd
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
+      - SUB_TOPICS=origin/a/wis2/de-dwd/#
+      - SUB_CENTRE_ID=de-dwd
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  de-dwd-gts-to-wis2:
+    container_name: de-dwd-gts-to-wis2
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
+      - SUB_TOPICS=origin/a/wis2/de-dwd-gts-to-wis2/#
+      - SUB_CENTRE_ID=de-dwd-gts-to-wis2
+      - WIS2_GB_BACKEND_URL=redis-node-4
+      - VERIFY_TOPIC="FALSE"
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ir-irimo:
+    container_name: ir-irimo
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2.irimo.ir:1883
+      - SUB_TOPICS=origin/a/wis2/ir-irimo/#
+      - SUB_CENTRE_ID=ir-irimo
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  us-ucsd-scripps-ldl:
+    container_name: us-ucsd-scripps-ldl
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.ldl.ucsd.edu:8883
+      - SUB_TOPICS=origin/a/wis2/us-ucsd-scripps-ldl/#
+      - SUB_CENTRE_ID=us-ucsd-scripps-ldl
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  nz-metservice:
+    container_name: nz-metservice
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.metservice.com:8883
+      - SUB_TOPICS=origin/a/wis2/nz-metservice/#
+      - SUB_CENTRE_ID=nz-metservice
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  cm-meteocameroon:
+    container_name: cm-meteocameroon
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2africa.marocmeteo.ma:1883
+      - SUB_TOPICS=origin/a/wis2/cm-meteocameroon/#
+      - SUB_CENTRE_ID=cm-meteocameroon
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ng-nimet:
+    container_name: ng-nimet
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2africa.marocmeteo.ma:1883
+      - SUB_TOPICS=origin/a/wis2/ng-nimet/#
+      - SUB_CENTRE_ID=ng-nimet
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  gn-meteo-guinee-conakry:
+    container_name: gn-meteo-guinee-conakry
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2africa.marocmeteo.ma:1883
+      - SUB_TOPICS=origin/a/wis2/gn-meteo-guinee-conakry/#
+      - SUB_CENTRE_ID=gn-meteo-guinee-conakry
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  in-imd:
+    container_name: in-imd
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2box.imd.gov.in:1883
+      - SUB_TOPICS=origin/a/wis2/in-imd/#
+      - SUB_CENTRE_ID=in-imd
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  kz-kazhydromet:
+    container_name: kz-kazhydromet
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2box.kazhydromet.kz:1883
+      - SUB_TOPICS=origin/a/wis2/kz-kazhydromet/#
+      - SUB_CENTRE_ID=kz-kazhydromet
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  kr-kma:
+    container_name: kr-kma
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2box.kma.go.kr:8883
+      - SUB_TOPICS=origin/a/wis2/kr-kma/#
+      - SUB_CENTRE_ID=kr-kma
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  ma-marocmeteo:
+    container_name: ma-marocmeteo
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2box.marocmeteo.ma:1883
+      - SUB_TOPICS=origin/a/wis2/ma-marocmeteo/#
+      - SUB_CENTRE_ID=ma-marocmeteo
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  na-meteona:
+    container_name: na-meteona
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2box.meteona.co:1883
+      - SUB_TOPICS=origin/a/wis2/na-meteona/#
+      - SUB_CENTRE_ID=na-meteona
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  us-noaa-synoptic:
+    container_name: us-noaa-synoptic
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2box.synopticdata.com:8883
+      - SUB_TOPICS=origin/a/wis2/us-noaa-synoptic/#
+      - SUB_CENTRE_ID=us-noaa-synoptic
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  br-inmet:
+    container_name: br-inmet
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2bra.inmet.gov.br:1883
+      - SUB_TOPICS=origin/a/wis2/br-inmet/#
+      - SUB_CENTRE_ID=br-inmet
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  my-metmalaysia:
+    container_name: my-metmalaysia
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2node.met.gov.my:1883
+      - SUB_TOPICS=origin/a/wis2/my-metmalaysia/#
+      - SUB_CENTRE_ID=my-metmalaysia
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  us-noaa-nws:
+    container_name: us-noaa-nws
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2node.nws.noaa.gov:8883
+      - SUB_TOPICS=origin/a/wis2/us-noaa-nws/#
+      - SUB_CENTRE_ID=us-noaa-nws
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  dk-dmi-opendata:
+    container_name: dk-dmi-opendata
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=ws://wis2-notification-node-test.dmi.govcloud.dk:443/
+      - SUB_TOPICS=origin/a/wis2/dk-dmi-opendata/#
+      - SUB_CENTRE_ID=dk-dmi-opendata
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  pl-imgw:
+    container_name: pl-imgw
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2-pilot.imgw.pl:8883
+      - SUB_TOPICS=origin/a/wis2/pl-imgw/#
+      - SUB_CENTRE_ID=pl-imgw
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  cl-meteochile:
+    container_name: cl-meteochile
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wischile.meteochile.gob.cl:1883
+      - SUB_TOPICS=origin/a/wis2/cl-meteochile/#
+      - SUB_CENTRE_ID=cl-meteochile
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  jp-jma:
+    container_name: jp-jma
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wisdev.kishou.go.jp:1883
+      - SUB_TOPICS=origin/a/wis2/jp-jma/#
+      - SUB_CENTRE_ID=jp-jma
+      - WIS2_GB_BACKEND_URL=redis-node-1
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  jp-jma-gts-to-wis2:
+    container_name: jp-jma-gts-to-wis2
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wisdev.kishou.go.jp:1883
+      - SUB_TOPICS=origin/a/wis2/jp-jma-gts-to-wis2/#
+      - SUB_CENTRE_ID=jp-jma-gts-to-wis2
+      - WIS2_GB_BACKEND_URL=redis-node-3
+      - VERIFY_TOPIC="FALSE"
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  se-smhi:
+    container_name: se-smhi
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis-tst.smhi.se:1883
+      - SUB_TOPICS=origin/a/wis2/se-smhi/#
+      - SUB_CENTRE_ID=se-smhi
+      - WIS2_GB_BACKEND_URL=redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  zm-zmd:
+    container_name: zm-zmd
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@zmdwis2box.mgee.gov.zm:1883
+      - SUB_TOPICS=origin/a/wis2/zm-zmd/#
+      - SUB_CENTRE_ID=zm-zmd
+      - WIS2_GB_BACKEND_URL=redis-node-0
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  td-anam:
+    container_name: td-anam
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@wis2.meteotchad.org:1883
+      - SUB_TOPICS=origin/a/wis2/td-anam/#
+      - SUB_CENTRE_ID=td-anam
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+

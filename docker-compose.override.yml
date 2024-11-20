@@ -1,0 +1,44 @@
+services:
+  fr-meteofrance:
+    container_name: fr-meteofrance
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=ws://everyone:everyone@globalbroker.meteo.fr:443/mqtt
+      - SUB_TOPICS=origin/a/wis2/fr-meteofrance/#
+      - SUB_CENTRE_ID=fr-meteofrance
+      - WIS2_GB_BACKEND_URL=redis-node-2
+    depends_on:
+      global-broker:
+        condition: service_started
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+
+  us-noaa-nws:
+    container_name: us-noaa-nws
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtts://everyone:everyone@wis2node.nws.noaa.gov:8883
+      - SUB_TOPICS=origin/a/wis2/us-noaa-nws/#
+      - SUB_CENTRE_ID=us-noaa-nws
+      - WIS2_GB_BACKEND_URL=redis-node-4
+    depends_on:
+      global-broker:
+        condition: service_started
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"

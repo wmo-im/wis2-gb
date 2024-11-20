@@ -1,0 +1,270 @@
+services:
+  loki:
+    image: grafana/loki:2.4.1
+    container_name: loki
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    command: -config.file=/etc/loki/loki-config.yml
+    volumes:
+      - loki-data:/loki
+      - ./loki/loki-config.yml:/etc/loki/loki-config.yml
+    ports:
+      - 3100:3100
+    
+  prometheus:
+    image: prom/prometheus:v2.37.0
+    container_name: prometheus
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=10d'
+
+  grafana:
+    image: grafana/grafana-oss:9.0.3
+    container_name: grafana
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_HIDE_VERSION=true
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/home.json
+      - GF_ANALYTICS_CHECK_FOR_UPDATES=false
+      - GF_USERS_VIEWERS_CAN_EDIT=true
+      - GF_UNIFIED_ALERTING_ENABLED=false
+      - GF_ALERTING_ENABLED=true
+      - GF_USERS_DEFAULT_THEME=dark
+      - GF_DISABLE_SIGNOUT_MENU=true
+      - GF_SERVER_ROOT_URL=http://localhost/monitoring
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
+    ports:
+      - 3000:3000
+
+  redis-node-0:
+    container_name: redis-node-0
+    image: docker.io/bitnami/redis-cluster:7.2
+    volumes:
+      - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-0:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+
+  redis-node-1:
+    container_name: redis-node-1
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-1:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+
+  redis-node-2:
+    container_name: redis-node-2
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-2:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+
+  redis-node-3:
+    container_name: redis-node-3
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-3:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+
+  redis-node-4:
+    container_name: redis-node-4
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-4:/bitnami/redis/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+
+  redis-node-5:
+    container_name: redis-node-5
+    image: docker.io/bitnami/redis-cluster:7.2
+    env_file:
+      - wis2-gb.env
+    volumes:
+      - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+      - redis-cluster_data-5:/bitnami/redis/data
+    depends_on:
+      - redis-node-0
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+      - redis-node-4
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - REDIS_CLUSTER_REPLICAS=1
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+      - REDIS_CLUSTER_CREATOR=yes
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+
+  metrics-collector:
+    container_name: metrics-collector
+    restart: always
+    build:
+      context: ./metrics-collector/
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    env_file:
+      - wis2-gb.env
+    ports:
+      - 8999:8006
+    depends_on:
+      global-broker:
+        condition: service_started
+
+  global-broker:
+    container_name: global-broker
+    build:
+      context: ./wis2-broker
+    env_file:
+      - wis2-gb.env
+    ports:
+        - 1883:1883
+        - 8883:8883
+    depends_on:
+      redis-node-5:
+        condition: service_started
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+
+  io-wis2dev-11-test:
+    container_name: io-wis2dev-11-test
+    build:
+      context: ./wis2-relay/
+    image: wis2-relay:latest
+    restart: always
+    env_file:
+      - wis2-gb.env
+    environment:
+      - SUB_BROKER_URL=mqtt://everyone:everyone@test-node-1.wis2dev.io:1883
+      - SUB_TOPICS=origin/a/wis2/#
+      - WIS2_GB_LOGGING_LOGLEVEL=INFO
+      - SUB_CENTRE_ID=io-wis2dev-11-test
+      - WIS2_GB_BACKEND_URL=redis-node-3
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://127.0.0.1:3100/loki/api/v1/push"
+        mode: non-blocking
+        max-buffer-size: 4m
+        loki-retries: "3"
+    depends_on:
+      global-broker:
+        condition: service_started
+
+volumes:
+  redis-cluster_data-0:
+    driver: local
+  redis-cluster_data-1:
+    driver: local
+  redis-cluster_data-2:
+    driver: local
+  redis-cluster_data-3:
+    driver: local
+  redis-cluster_data-4:
+    driver: local
+  redis-cluster_data-5:
+    driver: local
+  loki-data:
+    driver: local
+  prometheus-data:
+    driver: local

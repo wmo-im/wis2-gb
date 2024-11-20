@@ -2,9 +2,11 @@
 
 # wis2-gb
 
+
 ### wis2-gb is a Reference Implementation of a WIS2 Global Broker.
 
 <a href="docs/GlobalBroker_C4.png"><img alt="WIS2 Global Broker C4 diagram" src="GlobalBroker_C4.png" width="800"/></a>
+
 
 ## Workflow
 
@@ -24,32 +26,34 @@
 ## Installation
 
 ### Requirements
-- Python 3
-- [virtualenv](https://virtualenv.pypa.io)
+
+- Docker Compose
 
 ### Dependencies
-Dependencies are listed in [requirements.txt](requirements.txt). Dependencies
+Dependencies are listed in [REQUIREMENTS.md](REQUIREMENTS.md). Dependencies
+
 are automatically installed during pywis-pubsub installation.
 
 ### Installing wis2-gb
 
-```bash
-# setup virtualenv
-python3 -m venv --system-site-packages wis2-gb
-cd wis2-gb
-source bin/activate
-
 # clone codebase and install
 git clone https://github.com/wmo-im/wis2-gb.git
 cd wis2-gb
-pip3 install .
-```
+
+# configure broker profile
+./setup-links.sh brief
+make build
+make up
+
 
 ### Docker
 
 The Docker setup uses Docker and Docker Compose to manage the following services:
 
 - **wis2-broker**: MQTT broker
+
+- **wis2-relay**: MQTT subscription relay.  Subscribes to WIS2 participants, performs message verification and de-duplication and then publishes the message to the Global Broker.
+- **redis**: ['Redis Cache](https://redis.io/docs/latest/get-started/) provides hasing cache for de-duplication using Wis2 Notificaion Message UUID.
 - **pywis-pubsub**: MQTT subscription relay.  Subscribes to WIS2 participants, performs message verification and de-duplication and then publishes the message to the Global Broker.
 - **grafana**: [`Grafana`](https://grafana.com/grafana/dashboards/) provides administrator dashboards, log monitoring and browsing prometheus metrics.
 - **loki**: [`Grafana Loki`](https://grafana.com/docs/loki/latest/) provides administrator dashboards, log monitoring and browsing prometheus metrics.

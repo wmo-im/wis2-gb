@@ -1,0 +1,5 @@
+---
+relay: true
+verify_certs: false
+validate_message: true
+keepalive: 300
