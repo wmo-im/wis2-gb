@@ -2,9 +2,9 @@
 
 # wis2-gb
 
-wis2-gb is a Reference Implementation of a WIS2 Global Broker.
+### A Reference Implementation of a WIS2 Global Broker.
 
-<a href="docs/GlobalBroker_C4.png"><img alt="WIS2 Global Broker C4 diagram" src="docs/GlobalBroker_C4.drawio.png" width="1000"/></a>
+<a href="docs/GlobalBroker_C4.png"><img alt="WIS2 Global Broker C4 diagram" src="docs/GlobalBroker_C4.png" width="800"/></a>
 
 ## Workflow
 
@@ -24,6 +24,7 @@ wis2-gb is a Reference Implementation of a WIS2 Global Broker.
 ## Installation
 
 ### Requirements
+
 - [`Docker`](https://docker.com/)
 - [`Docker Compose`](https://github.com/docker/compose/)
 - python 3.10
@@ -32,13 +33,12 @@ wis2-gb is a Reference Implementation of a WIS2 Global Broker.
 - cmake
 - docker plugin grafana/loki-docker-driver:2.9.2
 
+
 ### Dependencies
 Dependencies are listed in [requirements.txt](requirements.txt). Dependencies
 are automatically installed during pywis-pubsub installation.
 
 ### Installing wis2-gb
-
-```bash
 
 # clone codebase
 git clone https://github.com/wmo-im/wis2-gb.git
@@ -55,7 +55,7 @@ make build
 
 # start global broker containers
 make up
-```
+
 
 ### Docker
 
@@ -88,7 +88,6 @@ Several setups are pre-configured and implemented with soft links using **setup-
 
 The [`Makefile`](Makefile) in the root directory provides options to manage the Docker Compose setup.
 
-```bash
 # build all images
 make build
 
@@ -115,7 +114,6 @@ make down
 
 # remove all volumes
 make rm
-```
 
 ## Development
 
