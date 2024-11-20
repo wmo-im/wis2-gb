@@ -47,6 +47,7 @@ REGISTRY.unregister(PROCESS_COLLECTOR)
 
 BROKER_URL = os.environ['WIS2_GB_BROKER_URL']
 CENTRE_ID = os.environ['WIS2_GB_CENTRE_ID']
+CENTRE_ID_CSV = os.environ['WIS2_GB_CENTRE_ID_CSV']
 
 LOGGING_LEVEL = os.environ['WIS2_GB_LOGGING_LEVEL']
 HTTP_PORT = 8006
@@ -55,15 +56,29 @@ logging.basicConfig(stream=sys.stdout)
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(LOGGING_LEVEL)
 
-METRIC_PUBLISHED = Counter(
-    'wmo_wis2_gb_messages_published_total',
-    'Number of WIS2 messages published',
+# sets metrics as per https://github.com/wmo-im/wis2-metric-hierarchy/blob/main/metric-hierarchy/gdc.csv  # noqa
+
+METRIC_NO_METADATA = Counter(
+    'wmo_wis2_gb_messages_no_metadata_total',
+    'Number of WIS2 messages missing recommended metadata',
     ['centre_id', 'report_by']
 )
 
 METRIC_INVALID = Counter(
-    'wmo_wis2_gb_messages_invalid_total',
+    'wmo_wis2_gb_messages_invalid_topic_total',
+    'Number of WIS2 messages published to invalid topic',
+    ['centre_id', 'report_by']
+)
+
+METRIC_INVALID = Counter(
+    'wmo_wis2_gb_messages_invalid_format_total',
     'Number of WIS2 messages failed validation',
+    ['centre_id', 'report_by']
+)
+
+METRIC_PUBLISHED = Counter(
+    'wmo_wis2_gb_messages_published_total',
+    'Number of WIS2 messages published',
     ['centre_id', 'report_by']
 )
 
@@ -73,21 +88,15 @@ METRIC_RECEIVED = Counter(
     ['centre_id', 'report_by']
 )
 
-METRIC_NO_METADATA = Counter(
-    'wmo_wis2_gb_messages_no_metadata_total',
-    'Number of WIS2 messages missing recommended metadata',
+METRIC_CONNECTED_FLAG = Gauge(
+    'wmo_wis2_gb_connected_flag',
+    'WIS2 Node connection status',
     ['centre_id', 'report_by']
 )
 
 METRIC_TIMESTAMP_SECONDS = Gauge(
     'wmo_wis2_gb_last_message_timestamp_seconds',
     'Timestamp in seconds for last message recieved',  # noqa
-    ['centre_id', 'report_by']
-)
-
-METRIC_CONNECTED_FLAG = Gauge(
-    'wmo_wis2_gb_connected_flag',
-    'WIS2 Node connection status',
     ['centre_id', 'report_by']
 )
 
@@ -139,9 +148,11 @@ def collect_metrics() -> None:
         LOGGER.debug(f"Value: {payload.get('labels')}")
         if topic == 'wis2-globalbroker/metrics/published_total':
             METRIC_PUBLISHED.labels(*labels).inc()
-        elif topic == 'wis2-globalbroker/metrics/invalid_total':
+        elif topic == 'wis2-globalbroker/metrics/invalid_topic_total':
             METRIC_INVALID.labels(*labels).inc()
-        elif topic == 'wis2-globalbroker/metrics/received_total':
+        elif topic == 'wis2-globalbroker/metrics/invalid_format_total':
+            METRIC_INVALID.labels(*labels).inc()
+        elif topic == 'wis2-globalbroker/metrics/messages_received_total':
             METRIC_RECEIVED.labels(*labels).inc()
         elif topic == 'wis2-globalbroker/metrics/no_metadata_total':
             METRIC_NO_METADATA.labels(*labels).inc()
