@@ -10,7 +10,6 @@ import time
 import re
 
 from typing import Union
-from redis.cluster import RedisCluster
 from wis2_relay import cli_options
 from wis2_relay import util
 from wis2_relay.topic import WIS2_Topic_Hierarchy
@@ -54,6 +53,17 @@ class RelaySub(threading.Thread):
             return
 
         centre_id = topic_check[3]
+    
+        try: 
+            if not self.redis.set(msg_dict['id'], centre_id, ex=3600, nx=True):
+                LOGGER.info(f"WIS2 Message exists {centre_id} ID: {msg_dict['id']}")
+                return
+            else:
+                LOGGER.info(f"WIS2 Message received {centre_id} ID: {msg_dict['id']}")
+                self.process_metric("messages_received_total")
+        except Exception as errmsg:
+            LOGGER.error(f'Redis operation failed: {errmsg}', exc_info=True)
+            return
     
         try:
             tpc_vfy = self.wnm_topic
@@ -108,17 +118,6 @@ class RelaySub(threading.Thread):
             LOGGER.error(f'Cannot validate message: {errmsg}', exc_info=True)
             return
     
-        redisclient = self.redis
-        try: 
-            if not redisclient.set(msg_dict['id'], centre_id, ex=3600, nx=True):
-                LOGGER.info(f"WIS2 Message exists {centre_id} ID: {msg_dict['id']}")
-                return
-            else:
-                LOGGER.info(f"WIS2 Message added {centre_id} ID: {msg_dict['id']}")
-        except Exception as errmsg:
-            LOGGER.error(f'Redis operation failed: {errmsg}', exc_info=True)
-            return
-    
         LOGGER.debug(f"Received message with Data_ID: {msg_dict['properties']['data_id']}")
         self.process_mesg(msg.topic, msg_dict)
 
@@ -134,12 +133,11 @@ class RelaySub(threading.Thread):
         self.priority = priority
     
         try:
-            redisclient = RedisCluster(host=options['redis_server'], port=6379, ssl=False, ssl_cert_reqs="none")
+            self.redis = redis.Redis(host=options['redis_server'], port=6379, ssl=True, ssl_cert_reqs="none")
         except Exception as errmsg:
             LOGGER.error(f"Redis connect failed: {errmsg} Redis Server Config: {options['redis_server']}", exc_info=True)
             exit
 
-        self.redis = redisclient
         self.client = MQTTPubSubClient(broker, options)
         self.client.bind('on_message', self.on_message_handler)
         LOGGER.info(f'Connected to Subscribtion broker {self.client.broker_safe_url}')
