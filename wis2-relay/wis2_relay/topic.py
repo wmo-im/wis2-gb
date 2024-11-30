@@ -31,7 +31,7 @@ from wis2_relay import cli_options
 
 LOGGER = logging.getLogger(__name__)
 
-TOPIC_SCHEMA_URL = 'https://wmo-im.github.io/wis2-topic-hierarchy/wth-bundle.zip'
+TOPIC_SCHEMA_URL = 'https://wmo-im.github.io/wis2-topic-hierarchy/wth-bundle.zip'  # noqa
 TOPIC_SCHEMA_DIR = Path.home() / '.wis2-topic-hierarchy' # noqa
 TOPIC_SCHEMA_FILE = TOPIC_SCHEMA_DIR / 'wis2-topic-hierarchy-bundled.zip'  # noqa
 TOPIC_SCHEMA_ESD = TOPIC_SCHEMA_DIR/ 'earth-system-discipline.csv'  # noqa
@@ -50,7 +50,8 @@ TOPIC_SCHEMA_WIS2 = [
     "cache/a/wis2/xxx/metadata/recommended"
     ]
 
-class WIS2_Topic_Hierarchy():
+
+class WIS2TopicHierarchy():
     def __init__(self):
         self.centre_id = {}
         self.wis2_topic = {}
@@ -68,12 +69,10 @@ class WIS2_Topic_Hierarchy():
         self.centre_id = self.centre_id_to_dict(TOPIC_SCHEMA_CENTRE)
         self.centre_id = self.centre_id_to_dict(TOPIC_SCHEMA_CENTRE)
         self.wis2_topic = self.wis2_topic_to_dict(TOPIC_SCHEMA_WIS2)
-        self.flatten_dict(self.esd_to_dict(TOPIC_SCHEMA_ESD),[])
+        self.flatten_dict(self.esd_to_dict(TOPIC_SCHEMA_ESD), [])
         self.earth_system = self.list_to_dict(self.esd_topic_list)
 
-
     def get_esd(self, topic):
-#        if topic[1] == "experimental" and len(topic) > 2:
         if topic[1] == "experimental":
             topic = topic[:2]
         if "/".join(topic) in self.earth_system:
@@ -93,7 +92,7 @@ class WIS2_Topic_Hierarchy():
             return True
         else:
             return False
-        
+
     def wis2_topic_to_dict(self, wis2_list):
         result = {}
         for item in wis2_list:
@@ -108,7 +107,7 @@ class WIS2_Topic_Hierarchy():
             for row in reader:
                 result[row[0]] = {'pub': True}
         return result
-    
+
     def esd_to_dict(self, filename):
         result = {}
         with open(filename, mode='r') as infile:
@@ -129,7 +128,7 @@ class WIS2_Topic_Hierarchy():
             if not bool(adict[dkey]):
                 self.esd_topic_list.append(alist)
             else:
-                self.flatten_dict(adict[dkey],alist)
+                self.flatten_dict(adict[dkey], alist)
             alist = alist[:level]
 
     def list_to_dict(self, list_of_lists):
@@ -142,17 +141,17 @@ class WIS2_Topic_Hierarchy():
     def sync_topic(self) -> None:
         """
         Sync WIS2 notification schema
-    
+
         :returns: `None`
         """
-    
+
         LOGGER.debug('Syncing topic hierarchy schema')
-    
+
         if TOPIC_SCHEMA_DIR.exists():
             shutil.rmtree(TOPIC_SCHEMA_DIR)
-    
+
         TOPIC_SCHEMA_DIR.mkdir(parents=True, exist_ok=True)
-    
+
         LOGGER.debug('Downloading message schema')
         with TOPIC_SCHEMA_FILE.open('wb') as fh:
             fh.write(urlopen(TOPIC_SCHEMA_URL).read())
@@ -161,13 +160,15 @@ class WIS2_Topic_Hierarchy():
 
         self.centre_id = self.centre_id_to_dict(TOPIC_SCHEMA_CENTRE)
         self.wis2_topic = self.wis2_topic_to_dict(TOPIC_SCHEMA_WIS2)
-        self.flatten_dict(self.esd_to_dict(TOPIC_SCHEMA_ESD),[])
+        self.flatten_dict(self.esd_to_dict(TOPIC_SCHEMA_ESD), [])
         self.earth_system = self.list_to_dict(self.esd_topic_list)
+
 
 @click.group()
 def topic():
     """Topic hierarchy schema management"""
-pass
+
+    pass
 
 
 @click.command('sync')
@@ -177,7 +178,8 @@ def sync(ctx, verbosity):
     """Sync WIS2 topic hierarchy schema"""
 
     click.echo('Syncing topic hierarchy schema')
-    tpc_mgmt = WIS2_Topic_Hierarchy()
+    tpc_mgmt = WIS2TopicHierarchy()
     tpc_mgmt.sync_topic()
+
 
 topic.add_command(sync)

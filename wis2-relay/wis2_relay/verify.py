@@ -22,23 +22,23 @@
 import json
 import logging
 from typing import Tuple
-#from jsonschema import validate
 from jsonschema.validators import Draft202012Validator
 from wis2_relay.schema import MESSAGE_SCHEMA
 
 LOGGER = logging.getLogger(__name__)
 
-class WNMValidate:
 
+class WNMValidate:
     def __init__(self) -> None:
         if not MESSAGE_SCHEMA.exists():
             msg = 'Schema not found. Please run wis2-relay schema sync'
             LOGGER.error(msg)
             raise RuntimeError(msg)
-    
+
         with open(MESSAGE_SCHEMA) as fh:
             self.schema = json.load(fh)
-            self.validator = Draft202012Validator(self.schema, format_checker=Draft202012Validator.FORMAT_CHECKER)
+            self.validator = Draft202012Validator(
+                self.schema, format_checker=Draft202012Validator.FORMAT_CHECKER)  # noqa
 
     def validate_message(self, message: dict) -> Tuple[bool, str]:
         success = False
@@ -51,7 +51,3 @@ class WNMValidate:
             error_message = repr(err)
 
         return (success, error_message)
-    
-#        is_valid, errors = self.validator(message, Draft202012Validator.FORMAT_CHECKER)
-#        is_valid, errors = self.validator.validate(message)
-#        return ((is_valid, errors))
