@@ -111,12 +111,18 @@ class MQTTPubSubClient:
                 LOGGER.debug('Setting TLS defaults')
                 self.conn.tls_set(**tls_settings)
 
+        connect_params = dict(
+            host=self.broker_url.hostname,
+            port=self.port,
+            properties=None
+        )
+
         if options.get('keepalive') is not None:
-            kalive = options.get('keepalive')
-            LOGGER.debug(f"Setting Keepalive {kalive}")
-            self.conn.connect(host=self.broker_url.hostname, port=self.port, keepalive=kalive, properties=None)
-        else:
-            self.conn.connect(host=self.broker_url.hostname, port=self.port, properties=None)
+            LOGGER.debug(f"keepalive {options['keepalive']}")
+            connect_params['keepalive'] = options['keepalive']
+
+        self.conn.connect(**connect_params)
+
         LOGGER.debug('Connected to broker')
 
     def pub(self, topic: str, message: str, qos: int = 1) -> bool:

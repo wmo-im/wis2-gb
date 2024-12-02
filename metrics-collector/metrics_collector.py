@@ -19,7 +19,6 @@
 #
 ###############################################################################
 
-import csv
 import json
 import logging
 import random
@@ -31,12 +30,9 @@ from urllib.parse import urlparse
 import paho.mqtt.client as mqtt
 from paho.mqtt.packettypes import PacketTypes
 from paho.mqtt.properties import Properties
-import time
-from datetime import datetime, timezone, timedelta
 
 from prometheus_client import (
-    disable_created_metrics,
-    Counter, Gauge, Info, 
+    disable_created_metrics, Counter, Gauge,
     start_http_server, REGISTRY, GC_COLLECTOR,
     PLATFORM_COLLECTOR, PROCESS_COLLECTOR
 )
@@ -100,19 +96,6 @@ METRIC_TIMESTAMP_SECONDS = Gauge(
     ['centre_id', 'report_by']
 )
 
-def get_gb_centre_id() -> str:
-    """
-    Derive GB centre id from WIS2_GB_GB_LINK environment variables
-
-    :returns: centre-id of matching GB
-    """
-    return CENTRE_ID
-
-    for key, value in os.environ.items():
-        if key.startswith('WIS2_GB_GB_LINK'):
-            centre_id, url, title = value.split(',', 2)
-            if GB == url:
-                return centre_id
 
 def init_metrics() -> None:
     """
@@ -122,6 +105,7 @@ def init_metrics() -> None:
     """
 
     disable_created_metrics()
+
 
 def collect_metrics() -> None:
     """
@@ -161,41 +145,50 @@ def collect_metrics() -> None:
         elif topic == 'wis2-globalbroker/metrics/connected_flag':
             METRIC_CONNECTED_FLAG.labels(*labels).set(value)
 
-    
     def setup_mqtt_client(connection_info: str, verify_cert: bool):
         randstring = ''.join(random.choice(string.hexdigits) for i in range(6))
         rand_id = "metrics-collector" + randstring
         LOGGER.info(f'Setting up MQTT client: {rand_id}')
         connection_info = urlparse(connection_info)
+
+        client_params = dict(
+            client_id=rand_id,
+            transport='websockets',
+            protocol=mqtt.MQTTv5,
+            userdata={'received_messages': []}
+        )
+
         if connection_info.scheme in ['ws', 'wss']:
-            client = mqtt.Client(client_id=rand_id, transport='websockets', protocol=mqtt.MQTTv5, userdata={'received_messages': []})
-        else:
-            client = mqtt.Client(client_id=rand_id, transport='tcp', protocol=mqtt.MQTTv5, userdata={'received_messages': []})
+            client_params['transport'] = 'websockets'
+
+        client = mqtt.Client(**client_params)
+
         client.on_connect = _sub_connect
         client.on_subscribe = _sub_subscribe
         client.on_message = _sub_message
-        client.username_pw_set(connection_info.username, connection_info.password)
+        client.username_pw_set(connection_info.username,
+                               connection_info.password)
         properties = Properties(PacketTypes.CONNECT)
         properties.SessionExpiryInterval = 300  # seconds
         if connection_info.port in [443, 8883]:
-            tls_settings = { 'tls_version': 2 }
+            tls_settings = {'tls_version': 2}
             if not verify_cert:
                 tls_settings['cert_reqs'] = ssl.CERT_NONE
             client.tls_set(**tls_settings)
         try:
             LOGGER.info(f'Connecting to {connection_info.hostname}')
-            client.connect(host=connection_info.hostname, port=connection_info.port, properties=properties)
-        except Exception as e:
-            LOGGER.error(f"Connection error: {e}")
-            LOGGER.error(f"Parsed connection string components:")
-            LOGGER.error(f"  Scheme: {connection_info.scheme}")
-            LOGGER.error(f"  Hostname: {connection_info.hostname}")
-            LOGGER.error(f"  Port: {connection_info.port}")
-            LOGGER.error(f"  Username: {connection_info.username}")
-            LOGGER.error(f"  Password: {connection_info.password}")
+            client.connect(host=connection_info.hostname,
+                           port=connection_info.port, properties=properties)
+        except Exception as err:
+            LOGGER.error(f'Connection error: {err}')
+            LOGGER.error('Parsed connection string components:')
+            LOGGER.error(f'  Scheme: {connection_info.scheme}')
+            LOGGER.error(f'  Hostname: {connection_info.hostname}')
+            LOGGER.error(f'  Port: {connection_info.port}')
+            LOGGER.error(f'  Username: {connection_info.username}')
+            LOGGER.error(f'  Password: {connection_info.password}')
             raise
         return client
-    
 
     try:
         client = setup_mqtt_client(BROKER_URL, False)

@@ -17,7 +17,7 @@
 # specific language governing permissions and limitations
 # under the License.
 #
-#30a31,32
+#
 ##############################################################################
 
 __version__ = '0.9.dev0'
@@ -35,6 +35,7 @@ def cli():
     """WIS2 Global Broker Publish/Subscribe container"""
 
     pass
+
 
 cli.add_command(schema)
 cli.add_command(topic)

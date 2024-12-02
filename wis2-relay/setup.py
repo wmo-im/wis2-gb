@@ -21,8 +21,8 @@
 
 from pathlib import Path
 import re
-from setuptools import Command, find_packages, setup
-import sys
+from setuptools import find_packages, setup
+
 
 def read(filename, encoding='utf-8'):
     """read file contents"""

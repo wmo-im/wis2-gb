@@ -19,30 +19,36 @@
 #
 ###############################################################################
 
-DOCKER_COMPOSE_ARGS=--project-name wis2-gb --file docker-compose.yml --file docker-compose.override.yml
+ENV ?= default
 
-build:
-	docker-compose $(DOCKER_COMPOSE_ARGS) build
+DOCKER_COMPOSE_ARGS=--project-name wis2-gb --file docker-compose-${ENV}.yml --file docker-compose-${ENV}.override.yml
+
+echo:
+	@echo ${ENV}
+	@echo ${DOCKER_COMPOSE_ARGS}
+
+build: echo
+	docker compose $(DOCKER_COMPOSE_ARGS) build
 
 up:
-	docker-compose $(DOCKER_COMPOSE_ARGS) up --detach
+	docker compose $(DOCKER_COMPOSE_ARGS) up --detach
 
 down:
-	docker-compose $(DOCKER_COMPOSE_ARGS) down
+	docker compose $(DOCKER_COMPOSE_ARGS) down
 
 start:
-	docker-compose $(DOCKER_COMPOSE_ARGS) start
+	docker compose $(DOCKER_COMPOSE_ARGS) start
 
 stop:
-	docker-compose $(DOCKER_COMPOSE_ARGS) stop
+	docker compose $(DOCKER_COMPOSE_ARGS) stop
 
 restart: down up
 
 force-build:
-	docker-compose $(DOCKER_COMPOSE_ARGS) build --no-cache
+	docker compose $(DOCKER_COMPOSE_ARGS) build --no-cache
 
 logs:
-	docker-compose $(DOCKER_COMPOSE_ARGS) logs --follow
+	docker compose $(DOCKER_COMPOSE_ARGS) logs --follow
 
 clean:
 	docker system prune -f
