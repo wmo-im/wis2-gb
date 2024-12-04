@@ -43,12 +43,12 @@ def str2bool(value: Any) -> bool:
     return value2
 
 
-SUB_BROKER_URL = os.environ.get('SUB_BROKER_URL')
-SUB_TOPICS = os.environ.get('SUB_TOPICS')
-SUB_CENTRE_ID = os.environ.get('SUB_CENTRE_ID')
-WIS2_GB_CENTRE_ID = os.environ.get('WIS2_GB_CENTRE_ID')
-WIS2_GB_BACKEND_URL = os.environ.get('WIS2_GB_BACKEND_URL')
-WIS2_GB_BROKER_URL = os.environ.get('WIS2_GB_BROKER_URL')
+SUB_BROKER_URL = os.environ.get('SUB_BROKER_URL', 'None')
+SUB_TOPICS = os.environ.get('SUB_TOPICS', 'None')
+SUB_CENTRE_ID = os.environ.get('SUB_CENTRE_ID', 'None')
+WIS2_GB_CENTRE_ID = os.environ.get('WIS2_GB_CENTRE_ID', 'None')
+WIS2_GB_BACKEND_URL = os.environ.get('WIS2_GB_BACKEND_URL', 'None')
+WIS2_GB_BROKER_URL = os.environ.get('WIS2_GB_BROKER_URL', 'None')
 VERIFY_MESSAGE = str2bool(os.environ.get('VERIFY_MESSAGE', False))
 VERIFY_DATA = str2bool(os.environ.get('VERIFY_DATA', False))
 VERIFY_TOPIC = str2bool(os.environ.get('VERIFY_TOPIC', False))

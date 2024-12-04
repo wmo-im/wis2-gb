@@ -5,7 +5,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@102.221.8.94:1883
       - SUB_TOPICS=origin/a/wis2/ly-lnmc/#
@@ -27,7 +27,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@136.156.130.101:1883
       - SUB_TOPICS=origin/a/wis2/zw-msd/#
@@ -49,7 +49,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/ag-antiguamet/#
@@ -71,7 +71,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/bs-metservice/#
@@ -93,7 +93,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/ms-metservice/#
@@ -115,7 +115,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/ai-metservice/#
@@ -137,7 +137,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/gy-hydromet/#
@@ -159,7 +159,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/jm-msj/#
@@ -181,7 +181,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/ky-cinws/#
@@ -203,7 +203,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/kn-metservice/#
@@ -225,7 +225,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/sx-metservice/#
@@ -247,7 +247,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/vc-metservice/#
@@ -269,7 +269,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/tc-metservice/#
@@ -291,7 +291,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/gd-metservice/#
@@ -313,7 +313,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/lc-metservice/#
@@ -335,7 +335,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@18.198.42.212:1883
       - SUB_TOPICS=origin/a/wis2/dm-dms/#
@@ -357,7 +357,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@20.239.90.71:1883
       - SUB_TOPICS=origin/a/wis2/hk-hko/#
@@ -379,7 +379,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@212.52.154.134:1883
       - SUB_TOPICS=origin/a/wis2/bf-anam/#
@@ -401,7 +401,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@3.77.214.70:1883
       - SUB_TOPICS=origin/a/wis2/sz-swazimet/#
@@ -423,7 +423,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:fanja6-hajxim-kUdxyq@39ed2d447029453c8495acc5d745e701.s1.eu.hivemq.cloud:8883
       - SUB_TOPICS=origin/a/wis2/eu-eumetnet-femdi/#
@@ -445,7 +445,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://guest:StandingRoomOnly@64.225.129.189:8883
       - SUB_TOPICS=origin/a/wis2/int-eumetsat/#
@@ -467,7 +467,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@ametwis2box.meteo.dz:1883
       - SUB_TOPICS=origin/a/wis2/dz-meteoalgerie/#
@@ -489,7 +489,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://wis2:Rf65L87534@aux.ecmwf.int:8883
       - SUB_TOPICS=origin/a/wis2/int-ecmwf/#
@@ -511,7 +511,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@barbadosweatherdata.org:1883
       - SUB_TOPICS=origin/a/wis2/bb-barbadosmetservices/#
@@ -533,7 +533,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@broker.wis2.cloud.bom.gov.au:8883
       - SUB_TOPICS=origin/a/wis2/au-bom/#
@@ -555,7 +555,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=ws://everyone:everyone@globalbroker.meteo.fr:443/mqtt
       - SUB_TOPICS=origin/a/wis2/fr-meteofrance/#
@@ -577,7 +577,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@hpfx.collab.science.gc.ca:8883
       - SUB_TOPICS=origin/a/wis2/ca-eccc-msc/#
@@ -599,7 +599,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2node.bmkg.go.id:1883
       - SUB_TOPICS=origin/a/wis2/id-bmkg/#
@@ -621,7 +621,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@sgp-mss.messaging.solace.cloud:8883
       - SUB_TOPICS=origin/a/wis2/sg-mss/#
@@ -643,7 +643,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@sgp-mss.messaging.solace.cloud:8883
       - SUB_TOPICS=origin/a/wis2/sg-mss-asmc/#
@@ -665,7 +665,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://uasdc_read:wmo-uasdc-campaign-2024-2e16f7@uasdc.wmo.synoptic.network:1883
       - SUB_TOPICS=origin/a/wis2/us-synoptic-uas/#
@@ -687,7 +687,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@w2b.inumet.gub.uy:8883
       - SUB_TOPICS=origin/a/wis2/uy-inumet/#
@@ -709,7 +709,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@w2b.smn.gov.ar:1883
       - SUB_TOPICS=origin/a/wis2/ar-smn/#
@@ -731,7 +731,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis.dirmet.cg:1883
       - SUB_TOPICS=origin/a/wis2/cg-met/#
@@ -753,7 +753,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis.insmet.cu:1883
       - SUB_TOPICS=origin/a/wis2/cu-insmet/#
@@ -775,7 +775,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis.meteo.go.ke:1883
       - SUB_TOPICS=origin/a/wis2/ke-kmd/#
@@ -797,7 +797,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis.meteoam.it:8883
       - SUB_TOPICS=origin/a/wis2/it-meteoam/#
@@ -819,7 +819,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis.metoffice.gov.tt:1883
       - SUB_TOPICS=origin/a/wis2/tt-trin-met/#
@@ -841,7 +841,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis.nms.gov.bz:1883
       - SUB_TOPICS=origin/a/wis2/bz-nms/#
@@ -863,7 +863,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis.weathersa.co.za:1883
       - SUB_TOPICS=origin/a/wis2/za-weathersa/#
@@ -885,7 +885,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
       - SUB_TOPICS=origin/a/wis2/il-ims/#
@@ -907,7 +907,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
       - SUB_TOPICS=origin/a/wis2/cy-dom/#
@@ -929,7 +929,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
       - SUB_TOPICS=origin/a/wis2/us-cimss/#
@@ -951,7 +951,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
       - SUB_TOPICS=origin/a/wis2/de-dwd/#
@@ -973,7 +973,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
       - SUB_TOPICS=origin/a/wis2/de-dwd-gts-to-wis2/#
@@ -996,7 +996,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2.irimo.ir:1883
       - SUB_TOPICS=origin/a/wis2/ir-irimo/#
@@ -1018,7 +1018,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.ldl.ucsd.edu:8883
       - SUB_TOPICS=origin/a/wis2/us-ucsd-scripps-ldl/#
@@ -1040,7 +1040,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.metservice.com:8883
       - SUB_TOPICS=origin/a/wis2/nz-metservice/#
@@ -1062,7 +1062,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2africa.marocmeteo.ma:1883
       - SUB_TOPICS=origin/a/wis2/cm-meteocameroon/#
@@ -1084,7 +1084,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2africa.marocmeteo.ma:1883
       - SUB_TOPICS=origin/a/wis2/ng-nimet/#
@@ -1106,7 +1106,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2africa.marocmeteo.ma:1883
       - SUB_TOPICS=origin/a/wis2/gn-meteo-guinee-conakry/#
@@ -1128,7 +1128,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2box.imd.gov.in:1883
       - SUB_TOPICS=origin/a/wis2/in-imd/#
@@ -1150,7 +1150,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2box.kazhydromet.kz:1883
       - SUB_TOPICS=origin/a/wis2/kz-kazhydromet/#
@@ -1172,7 +1172,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2box.kma.go.kr:8883
       - SUB_TOPICS=origin/a/wis2/kr-kma/#
@@ -1194,7 +1194,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2box.marocmeteo.ma:1883
       - SUB_TOPICS=origin/a/wis2/ma-marocmeteo/#
@@ -1216,7 +1216,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2box.meteona.co:1883
       - SUB_TOPICS=origin/a/wis2/na-meteona/#
@@ -1238,7 +1238,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2box.synopticdata.com:8883
       - SUB_TOPICS=origin/a/wis2/us-noaa-synoptic/#
@@ -1260,7 +1260,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2bra.inmet.gov.br:1883
       - SUB_TOPICS=origin/a/wis2/br-inmet/#
@@ -1282,7 +1282,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2node.met.gov.my:1883
       - SUB_TOPICS=origin/a/wis2/my-metmalaysia/#
@@ -1304,7 +1304,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2node.nws.noaa.gov:8883
       - SUB_TOPICS=origin/a/wis2/us-noaa-nws/#
@@ -1326,7 +1326,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=ws://wis2-notification-node-test.dmi.govcloud.dk:443/
       - SUB_TOPICS=origin/a/wis2/dk-dmi-opendata/#
@@ -1348,7 +1348,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2-pilot.imgw.pl:8883
       - SUB_TOPICS=origin/a/wis2/pl-imgw/#
@@ -1370,7 +1370,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wischile.meteochile.gob.cl:1883
       - SUB_TOPICS=origin/a/wis2/cl-meteochile/#
@@ -1392,7 +1392,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wisdev.kishou.go.jp:1883
       - SUB_TOPICS=origin/a/wis2/jp-jma/#
@@ -1414,7 +1414,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wisdev.kishou.go.jp:1883
       - SUB_TOPICS=origin/a/wis2/jp-jma-gts-to-wis2/#
@@ -1437,7 +1437,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis-tst.smhi.se:1883
       - SUB_TOPICS=origin/a/wis2/se-smhi/#
@@ -1459,7 +1459,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@zmdwis2box.mgee.gov.zm:1883
       - SUB_TOPICS=origin/a/wis2/zm-zmd/#
@@ -1481,7 +1481,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:everyone@wis2.meteotchad.org:1883
       - SUB_TOPICS=origin/a/wis2/td-anam/#

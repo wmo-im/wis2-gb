@@ -153,8 +153,9 @@ def collect_metrics() -> None:
 
         client_params = dict(
             client_id=rand_id,
-            transport='websockets',
+            transport='tcp',
             protocol=mqtt.MQTTv5,
+            callback_api_version=mqtt.CallbackAPIVersion.VERSION2,
             userdata={'received_messages': []}
         )
 

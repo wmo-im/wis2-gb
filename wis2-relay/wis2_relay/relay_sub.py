@@ -1,7 +1,7 @@
 import threading
 import json
 import logging
-import redis
+from redis.cluster import RedisCluster as Redis
 import time
 
 from typing import Union
@@ -13,8 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class RelaySub(threading.Thread):
-    def process_metric(self, metric_name: str,
-                       value: Union[str, int, float] = None):
+    def process_metric(self, metric_name: str, value: Union[str, int, float] = None):
         userdata = self.client.userdata
         LOGGER.debug(f'Publishing metric {metric_name}')
         message_payload = {
@@ -22,9 +21,7 @@ class RelaySub(threading.Thread):
         }
         if value is not None:
             message_payload['value'] = value
-
-        self.metricq.put((f'wis2-globalbroker/metrics/{metric_name}',
-                          message_payload))
+        self.metricq.put((f'wis2-globalbroker/metrics/{metric_name}', message_payload))
 
     def process_mesg(self, topic, mesg_dict):
         LOGGER.debug(f"Publishing message: {topic}")
@@ -130,8 +127,8 @@ class RelaySub(threading.Thread):
         self.priority = priority
 
         try:
-            self.redis = redis.Redis(host=options['redis_server'], port=6379,
-                                     ssl=True, ssl_cert_reqs="none")
+            LOGGER.info(f"Connecting to Redis Cluster {options['redis_server']}")
+            self.redis = Redis(host=options['redis_server'], port=6379)
         except Exception as err:
             LOGGER.error(f"Redis connect failed: {err} Redis Server Config: {options['redis_server']}", exc_info=True)  # noqa
             exit

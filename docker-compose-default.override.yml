@@ -4,7 +4,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-default.env
     environment:
       - SUB_BROKER_URL=ws://everyone:everyone@globalbroker.meteo.fr:443/mqtt
       - SUB_TOPICS=origin/a/wis2/fr-meteofrance/#
@@ -26,7 +26,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-default.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2node.nws.noaa.gov:8883
       - SUB_TOPICS=origin/a/wis2/us-noaa-nws/#

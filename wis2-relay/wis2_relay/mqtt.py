@@ -65,11 +65,9 @@ class MQTTPubSubClient:
 
         msg = f'Connecting to broker {self.broker_safe_url} with id {self.client_id}'  # noqa
         LOGGER.debug(msg)
-        self.conn = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION2,
-                                       self.client_id,
-                                       userdata=self.userdata,
-                                       transport=transport)
-
+        self.conn = mqtt_client.Client(callback_api_version=mqtt_client.CallbackAPIVersion.VERSION2, 
+                                       protocol=mqtt_client.MQTTv5, client_id=self.client_id, 
+                                       userdata=self.userdata, transport=transport)
         self.conn.enable_logger(logger=LOGGER)
 
         if self.broker_url.scheme in ['ws', 'wss']:

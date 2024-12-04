@@ -45,7 +45,7 @@ services:
         max-buffer-size: 4m
         loki-retries: "3"
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     volumes:
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/datasources:/etc/grafana/provisioning/datasources
@@ -88,7 +88,7 @@ services:
     container_name: redis-node-1
     image: docker.io/bitnami/redis-cluster:7.2
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     volumes:
       - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
       - redis-cluster_data-1:/bitnami/redis/data
@@ -107,7 +107,7 @@ services:
     container_name: redis-node-2
     image: docker.io/bitnami/redis-cluster:7.2
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     volumes:
       - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
       - redis-cluster_data-2:/bitnami/redis/data
@@ -126,7 +126,7 @@ services:
     container_name: redis-node-3
     image: docker.io/bitnami/redis-cluster:7.2
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     volumes:
       - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
       - redis-cluster_data-3:/bitnami/redis/data
@@ -145,7 +145,7 @@ services:
     container_name: redis-node-4
     image: docker.io/bitnami/redis-cluster:7.2
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     volumes:
       - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
       - redis-cluster_data-4:/bitnami/redis/data
@@ -164,7 +164,7 @@ services:
     container_name: redis-node-5
     image: docker.io/bitnami/redis-cluster:7.2
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     volumes:
       - ./redis/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
       - redis-cluster_data-5:/bitnami/redis/data
@@ -193,7 +193,7 @@ services:
     build:
       context: ./metrics-collector/
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     ports:
       - 8999:8006
     depends_on:
@@ -212,7 +212,7 @@ services:
     build:
       context: ./wis2-broker
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     ports:
         - 1883:1883
         - 8883:8883
@@ -234,7 +234,7 @@ services:
     image: wis2-relay
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@globalbroker.meteo.fr:8883
       - SUB_TOPICS=origin/a/wis2/#
@@ -256,7 +256,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@globalbroker.inmet.gov.br:8883
       - SUB_TOPICS=origin/a/wis2/#
@@ -278,7 +278,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://everyone:everyone@wis2.dwd.de:8883
       - SUB_TOPICS=cache/a/wis2/#
@@ -300,7 +300,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-full.env
     environment:
       - SUB_BROKER_URL=mqtts://wis2:synoptic_global_cache_mvp_2023@cache.wis2.synopticdata.com:8883
       - SUB_TOPICS=cache/a/wis2/#

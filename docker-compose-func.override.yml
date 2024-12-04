@@ -4,7 +4,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-2.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-12-test/#
@@ -26,7 +26,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-3.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-13-test/#
@@ -48,7 +48,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-4.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-14-test/#
@@ -70,7 +70,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-5.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-15-test/#
@@ -92,7 +92,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-6.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-16-test/#
@@ -114,7 +114,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-7.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-17-test/#
@@ -136,7 +136,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-8.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-18-test/#
@@ -158,7 +158,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-9.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-19-test/#
@@ -180,7 +180,7 @@ services:
     image: wis2-relay:latest
     restart: always
     env_file:
-      - wis2-gb.env
+      - wis2-gb-func.env
     environment:
       - SUB_BROKER_URL=mqtt://everyone:onlyone@test-node-10.wis2dev.io:1883
       - SUB_TOPICS=origin/a/wis2/io-wis2dev-20-test/#
