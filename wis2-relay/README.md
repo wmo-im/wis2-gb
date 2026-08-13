@@ -62,8 +62,8 @@ vim local.yml # update accordingly to configure subscribe options
 ### Subscribing
 
 ```bash
-# sync WIS2 notification schema
-pywis-pubsub schema sync
+# sync schemas and codelists bundle
+pywis-pubsub bundle sync
 
 # connect, and simply echo messages
 pywis-pubsub subscribe --config local.yml
